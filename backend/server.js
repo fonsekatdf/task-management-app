@@ -14,10 +14,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// test routes
+// routes
 app.get("/", (req, res) => {
     res.send("Task Management API is running...");
 });
+
+app.use("/api/tasks", require("./routes/taskRoutes"));
 
 const PORT = process.env.PORT || 5000;
 
