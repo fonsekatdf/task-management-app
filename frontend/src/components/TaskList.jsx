@@ -9,7 +9,7 @@ const TaskList = ({ tasks, deleteTask, completeTask }) => {
     <div className="task-list">
       {tasks.map((task) => (
         <TaskItems
-          key={task.id}
+          key={task._id}
           task={task}
           deleteTask={deleteTask}
           completeTask={completeTask}

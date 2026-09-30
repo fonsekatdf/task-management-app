@@ -11,12 +11,12 @@ const TaskItems = ({ task, deleteTask, completeTask }) => {
 
       <div className="task-actions">
         {task.status !== "Completed" && (
-          <button onClick={() => completeTask(task.id)}>
+          <button onClick={() => completeTask(task._id)}>
             Mark as Completed
           </button>
         )}
 
-        <button className="delete-btn" onClick={() => deleteTask(task.id)}>
+        <button className="delete-btn" onClick={() => deleteTask(task._id)}>
           Delete
         </button>
       </div>

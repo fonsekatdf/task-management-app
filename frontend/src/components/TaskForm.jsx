@@ -12,9 +12,8 @@ const TaskForm = ({ addTask }) => {
     }
 
     const newTask = {
-      id: Date.now(),
-      title: title,
-      description: description,
+      title,
+      description,
       status: "Pending",
     };
 
