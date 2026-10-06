@@ -16,13 +16,15 @@ app.use(express.json());
 
 // routes
 app.get("/", (req, res) => {
-    res.send("Task Management API is running...");
+  res.send("Task Management API is running...");
 });
+
+app.use("/api/auth", require("./routes/authRoutes"));
 
 app.use("/api/tasks", require("./routes/taskRoutes"));
 
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
