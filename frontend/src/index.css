@@ -1,0 +1,196 @@
+/* ============================================================
+   Global design tokens + base + Login / Register styling
+   ============================================================ */
+
+:root {
+  --ink: #1a1a14;
+  --muted: #5c5a44;
+  --paper: #f6f0c9;
+  --cream: #fff9d6;
+  --cream-soft: #fffcee;
+  --yellow: #f2df68;
+  --yellow-deep: #e4d15a;
+  --line: #cfc9a0;
+
+  /* accent colours used for status + task cards */
+  --coral: #ff8a6b;
+  --sky: #7cc6fe;
+  --mint: #8fd6a8;
+  --lilac: #c7a8f0;
+
+  --serif: "DM Serif Display", Georgia, "Times New Roman", serif;
+  --sans: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--sans);
+  color: var(--ink);
+  background-color: var(--paper);
+  background-image: radial-gradient(rgba(26, 26, 20, 0.2) 1px, transparent 1.3px);
+  background-size: 14px 14px;
+}
+
+button,
+input,
+textarea {
+  font-family: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+/* ---------- Shared brand mark ---------- */
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-mark {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  font-family: var(--serif);
+  font-size: 20px;
+  line-height: 1;
+  background: var(--yellow);
+}
+
+.brand-name {
+  font-family: var(--mono);
+  font-size: 14px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* ---------- Login / Register ---------- */
+
+.auth-container {
+  width: min(430px, calc(100% - 32px));
+  margin: 72px auto;
+  padding: 36px 36px 30px;
+  background: var(--cream);
+  border: 1px solid var(--ink);
+  box-shadow: 8px 8px 0 var(--yellow-deep), 8px 8px 0 1px var(--ink);
+}
+
+.auth-container .brand {
+  justify-content: center;
+  margin-bottom: 26px;
+}
+
+.auth-container h1 {
+  margin: 0;
+  text-align: center;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 40px;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.auth-subtitle {
+  margin: 8px 0 26px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.auth-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.auth-container input {
+  width: 100%;
+  padding: 14px 14px;
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--cream-soft);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.auth-container input::placeholder {
+  color: #8c8a70;
+}
+
+.auth-container input:focus {
+  outline: none;
+  border-color: var(--ink);
+  box-shadow: 3px 3px 0 var(--yellow);
+}
+
+.auth-container button {
+  margin-top: 6px;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--cream);
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+
+.auth-container button::after {
+  content: "\2197";
+  margin-left: 10px;
+  font-size: 13px;
+}
+
+.auth-container button:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--coral);
+}
+
+.auth-container button:active {
+  transform: translate(0, 0);
+  box-shadow: none;
+}
+
+.auth-container p[role="alert"] {
+  margin: 14px 0 0;
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 14px;
+  color: #7a1d0b;
+  background: #ffd9cc;
+  border: 1px solid var(--coral);
+}
+
+.auth-switch {
+  margin: 24px 0 0;
+  padding-top: 18px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.auth-switch a {
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.auth-switch a:hover {
+  background: var(--yellow);
+}
