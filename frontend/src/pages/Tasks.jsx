@@ -51,7 +51,7 @@ const Tasks = () => {
       });
 
       setTasks((previousTasks) =>
-        previousTasks.map((task) => (task.id === id ? response.data : task)),
+        previousTasks.map((task) => (task._id === id ? response.data : task)),
       );
     } catch (error) {
       console.error("Error updating task:", error);
