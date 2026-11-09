@@ -20,8 +20,17 @@ const Login = () => {
       });
 
       console.log("Login response:", response.data);
-      // save JWT token
+      // save JWT token and user details
       localStorage.setItem("token", response.data.token);
+      if (response.data.name || response.data.email) {
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            name: response.data.name,
+            email: response.data.email,
+          }),
+        );
+      }
 
       navigate("/");
     } catch (error) {
