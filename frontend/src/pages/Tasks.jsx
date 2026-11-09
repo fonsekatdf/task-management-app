@@ -8,8 +8,21 @@ import "../App.css";
 const Tasks = () => {
   const [tasks, setTasks] = useState([]);
   const [error, setError] = useState("");
+  const [user, setUser] = useState(null);
 
   const navigate = useNavigate();
+
+  // load user info if available in localStorage
+  useEffect(() => {
+    try {
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
+    } catch (err) {
+      console.error("Failed to parse user info:", err);
+    }
+  }, []);
 
   // load tasks from MongoDb through backend
   // runs once when the page loads
@@ -74,18 +87,37 @@ const Tasks = () => {
   // logout
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     navigate("/login");
   };
 
   return (
     <div className="container">
-      <h1>Task Manager</h1>
+      <header className="app-header">
+        <div className="brand">
+          <span className="brand-mark">✓</span>
+          <span className="brand-name">Task Manager</span>
+        </div>
+
+        <div className="header-user">
+          {user && (
+            <div className="user-info">
+              <strong>{user.name}</strong>
+              <span>{user.email}</span>
+            </div>
+          )}
+          <button
+            type="button"
+            className="logout-btn"
+            onClick={handleLogout}
+            aria-label="Logout"
+          >
+            Logout
+          </button>
+        </div>
+      </header>
 
       {error && <p role="alert">{error}</p>}
-
-      <button type="button" onClick={handleLogout}>
-        Logout
-      </button>
 
       <TaskForm addTask={addTask} />
 
