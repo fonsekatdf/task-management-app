@@ -50,9 +50,5 @@ jobs:
       - name: Build backend Docker image
         run: docker build -t task-management-backend ./backend
 
-      # Step 8: Build frontend Docker image
       - name: Build frontend Docker image
-        run: |
-          docker build \
-            --build-arg VITE_API_URL=http://localhost:5000 \
-            -t task-management-frontend ./frontend
+        run: docker build --build-arg VITE_API_URL=http://localhost:5000 -t task-management-frontend ./frontend
