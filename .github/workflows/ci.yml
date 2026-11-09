@@ -1,0 +1,57 @@
+name: Task Management App CI
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  build-and-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Get repository source code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Step 3: Install backend dependencies
+      - name: Install backend dependencies
+        working-directory: ./backend
+        run: npm ci
+
+      # Step 4: Install frontend dependencies
+      - name: Install frontend dependencies
+        working-directory: ./frontend
+        run: npm ci
+
+      # Step 5: Run frontend ESLint
+      - name: Run frontend lint
+        working-directory: ./frontend
+        run: npm run lint
+
+      # Step 6: Build React frontend
+      - name: Build frontend
+        working-directory: ./frontend
+        run: npm run build
+
+      # Step 7: Build backend Docker image
+      - name: Build backend Docker image
+        run: docker build -t task-management-backend ./backend
+
+      # Step 8: Build frontend Docker image
+      - name: Build frontend Docker image
+        run: docker build \
+          --build-arg VITE_API_URL=http://localhost:5000 \
+          -t task-management-frontend ./frontend

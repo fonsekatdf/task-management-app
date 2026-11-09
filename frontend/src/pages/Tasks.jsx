@@ -8,21 +8,17 @@ import "../App.css";
 const Tasks = () => {
   const [tasks, setTasks] = useState([]);
   const [error, setError] = useState("");
-  const [user, setUser] = useState(null);
-
-  const navigate = useNavigate();
-
-  // load user info if available in localStorage
-  useEffect(() => {
+  const [user] = useState(() => {
     try {
       const storedUser = localStorage.getItem("user");
-      if (storedUser) {
-        setUser(JSON.parse(storedUser));
-      }
+      return storedUser ? JSON.parse(storedUser) : null;
     } catch (err) {
       console.error("Failed to parse user info:", err);
+      return null;
     }
-  }, []);
+  });
+
+  const navigate = useNavigate();
 
   // load tasks from MongoDb through backend
   // runs once when the page loads
