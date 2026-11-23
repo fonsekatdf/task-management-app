@@ -50,6 +50,27 @@ pipeline {
             }
         }
 
+
+        stage('Backend Syntax Validation') {
+            steps {
+                dir('backend') {
+                    sh '''
+                        set -e
+
+                        echo "Checking backend JavaScript files..."
+
+                        find . \
+                            -path './node_modules' -prune -o \
+                            -name '*.js' -type f -print0 |
+                            xargs -0 -r -n1 node --check
+
+                        echo "Backend syntax validation successful!"
+                    '''
+                }
+            }
+        }
+
+
         stage('Install Frontend Dependencies') {
             steps {
                 dir('frontend') {
